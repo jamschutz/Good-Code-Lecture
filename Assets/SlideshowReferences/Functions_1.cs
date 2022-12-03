@@ -1,19 +1,26 @@
-public string input;
-private void Start()
+using UnityEngine;
+
+public class Functions_1 
 {
-    string r = "";
-    for(int i = input.Length - 1; i >= 0; i--) {
-        r += input[i];
-    }
+    public string input;
+    private void Start()
+    {
+        string r = "";
+        for(int i = input.Length - 1; i >= 0; i--) {
+            r += input[i];
+        }
 
-    for(int i = 0; i < r.Length; i += 3) {
-        r[i] = r[i].ToUpper();
-    }
+        char[] rArray = r.ToCharArray();
+        for(int i = 0; i < rArray.Length; i += 3) {
+            rArray[i] = char.ToUpper(rArray[i]);
+        }
+        r = new string(rArray);
 
-    int n = 0;
-    foreach(char c in r) {
-        if(c.IsLower()) n++;
-    }
+        int n = 0;
+        foreach(char c in r) {
+            if(char.IsLower(c)) n++;
+        }
 
-    Debug.Log($"{r}; {n}");
+        Debug.Log($"{r}; {n}");
+    }
 }
