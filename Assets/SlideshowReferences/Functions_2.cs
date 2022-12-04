@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Functions_2
+public class Functions_2 : MonoBehaviour
 {
     public string input;
     private void Start()
@@ -42,5 +42,26 @@ public class Functions_2
         }
 
         return n;
+    }
+
+    public float moveSpeed = 5;
+    private void Update()
+    {
+        // go up
+        if(Input.GetKeyDown(KeyCode.W)) {
+            transform.Translate(transform.forward * moveSpeed);
+        }
+        // go left
+        if(Input.GetKeyDown(KeyCode.A)) {
+            transform.Translate(-transform.right * moveSpeed);
+        }
+        // go back
+        if(Input.GetKeyDown(KeyCode.S)) {
+            transform.Translate(-transform.forward * moveSpeed);
+        }
+        // go right
+        if(Input.GetKeyDown(KeyCode.D)) {
+            transform.Translate(transform.right * moveSpeed);
+        }
     }
 }
