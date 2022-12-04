@@ -1191,6 +1191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   minMaxSize: {x: 1, y: 5}
+  scaleOnMouseDown: 8
   objectsInScene:
   - {fileID: 1445697749}
   - {fileID: 638482477}

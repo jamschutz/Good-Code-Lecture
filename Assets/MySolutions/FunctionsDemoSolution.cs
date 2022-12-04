@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class FunctionsDemoSolution : MonoBehaviour
 {
     public float moveSpeed;
     public Vector2 minMaxSize;
@@ -11,23 +11,35 @@ public class PlayerController : MonoBehaviour
     private float minYPosition = -4.33f;
     private float maxYPosition = 6.11f;public Transform[] objectsInScene;
 
+    private const int LEFT_MOUSE_BUTTON = 0;
+
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.W)) {
-            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.A)) {
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.S)) {
-            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.D)) {
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        MovePlayer();
+        ScalePlayer();
+        TurnAllObjectsBlue();
+        TurnClosestObjectRed();
+    }
+
+
+    private void MovePlayer()
+    {
+        void Move(Vector3 direction) 
+        {
+            transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
 
-        if(Input.GetMouseButton(0)) {
+        if(Input.GetKey(KeyCode.W)) Move(Vector3.up);
+        if(Input.GetKey(KeyCode.A)) Move(Vector3.left);
+        if(Input.GetKey(KeyCode.S)) Move(Vector3.down);
+        if(Input.GetKey(KeyCode.D)) Move(Vector3.right);
+    }
+
+
+    private void ScalePlayer()
+    {
+        if(Input.GetMouseButton(LEFT_MOUSE_BUTTON)) {
             transform.localScale = new Vector3(scaleOnMouseDown, scaleOnMouseDown, scaleOnMouseDown);
         }
         else {
@@ -35,11 +47,19 @@ public class PlayerController : MonoBehaviour
             float scale = Mathf.Lerp(minMaxSize.x, minMaxSize.y, heightAsPercent);
             transform.localScale = new Vector3(scale, scale, scale);
         }
+    }
 
+
+    private void TurnAllObjectsBlue()
+    {
         foreach(var obj in objectsInScene) {
             obj.GetComponent<SpriteRenderer>().color = Color.blue;
         }
+    }
 
+
+    private void TurnClosestObjectRed()
+    {
         float bestDistance = float.PositiveInfinity;
         Transform closestObject = null;
 
