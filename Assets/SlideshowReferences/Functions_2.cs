@@ -15,12 +15,12 @@ public class Functions_2
 
     private string GetReversedString(string s)
     {
-        string reversed = "";
+        string r = "";
         for(int i = input.Length - 1; i >= 0; i--) {
-            reversed += s[i];
+            r += s[i];
         }
 
-        return reversed;
+        return r;
     }
 
 
