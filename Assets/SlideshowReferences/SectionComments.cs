@@ -7,7 +7,6 @@ namespace AI
     [RequireComponent(typeof(BoxCollider2D))]
     public class NavMesh : MonoBehaviour
     {
-#region
         [Header("Vertices")]
         public float distanceBetweenVertices = 5;
         public float minDistanceFromWalls = 2;
@@ -17,7 +16,6 @@ namespace AI
 
 
         private List<NavMeshVertex> vertices;
-#endregion
 
         // ========================================================== //
         // ===========    Lifecycle Methods                ========== //
@@ -79,7 +77,6 @@ namespace AI
             foreach(var vertex in vertices) {
                 // look at every other vertex
                 foreach(var other in vertices) {
-                    // get distance
                     float distance = Vector2.Distance(vertex.position, other.position);
 
                     // if this is us, ignore...
